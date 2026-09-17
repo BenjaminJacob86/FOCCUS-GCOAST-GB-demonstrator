@@ -1,0 +1,66 @@
+# FOCCUS demonstrator — Douglas / Black Sea variant
+
+app:
+  page_title: "FOCCUS Black Sea demonstrator"
+  dashboard_page_title: "SCHISM indicators + assessment (Black Sea)"
+  header_title: "FOCCUS Demonstrator — Black Sea coastal assessment"
+  tagline: "Interactive erosion indicators and polygon-based area assessment for the Black Sea domain."
+  logo_primary: "FOCCUS_Logo_clean RGB_whiteBG.png"
+  logo_fallback: "FOCCUS_Logo_clean RGB.png"
+  about_markdown: "ESC1GB.md"
+
+s3:
+  endpoint_url: "https://minio.dive.edito.eu"
+  bucket: "oidc-jacobb"
+  prefix: "Hereon/IndicatorAssesment_douglas"
+
+domain:
+  default_run_date: "2026-06-04"
+  bounds: [41.25, 27.44, 46.66, 31.63]
+
+indicators:
+  "SSH q95":
+    file: "q95_ssh_tris.pmtiles"
+    nc_file: "q95_ssh.nc"
+    nc_variable: "q95_ssh"
+    attribute: "q95_ssh"
+    caption: "SSH q95 (m)"
+    unit: "m"
+    cmap: "plasma"
+    critical_default: 1.0
+
+  "Significant wave height q95":
+    file: "q95_Hs_tris.pmtiles"
+    nc_file: "q95_Hs.nc"
+    nc_variable: "q95_Hs"
+    attribute: "q95_Hs"
+    caption: "Hs q95 (m)"
+    unit: "m"
+    cmap: "plasma"
+    critical_default: 1.5
+
+  "Bed stress q95":
+    file: "q95_tau_tris.pmtiles"
+    nc_file: "q95_tau.nc"
+    nc_variable: "q95_tau"
+    attribute: "q95_tau"
+    caption: "Bed stress q95 (N/m²)"
+    unit: "Pa"
+    cmap: "plasma"
+    critical_default: 0.5
+
+  "Erosion risk ratio (R1)":
+    file: "R1_tris.pmtiles"
+    nc_file: "R1.nc"
+    nc_variable: "R1"
+    attribute: "erosion_R1"
+    attribute_fallbacks: ["R1"]
+    caption: "Erosion risk ratio R1"
+    unit: "-"
+    cmap: "erosion_risk"
+    critical_default: 0.5
+    value_min_default: 0.25
+    value_max_default: 1.0
+    use_domain_bounds: true
+
+  # nveg_tris.pmtiles not yet on Edito for this folder — omit or upload first.

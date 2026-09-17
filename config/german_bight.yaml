@@ -1,0 +1,104 @@
+# FOCCUS demonstrator — German Bight (default deployment)
+#
+# S3 layout (per run date):
+#   s3://project-foccus/Hereon/ESC1/YYYYMMDD/
+#     ├── no_veg/
+#     ├── with_veg/
+#     └── diff/
+
+app:
+  page_title: "FOCCUS German Bight demonstrator"
+  dashboard_page_title: "SCHISM indicators + assessment (S3)"
+  header_title: "FOCCUS Demonstrator — Management and protection of the coastal area, German Bight"
+  tagline: "Interactive GCOAST-GB erosion indicators and polygon-based area assessment for the German Bight."
+  logo_primary: "FOCCUS_Logo_clean RGB_whiteBG.png"
+  logo_fallback: "FOCCUS_Logo_clean RGB.png"
+  about_markdown: "ESC1GB.md"
+
+s3:
+  endpoint_url: "https://minio.dive.edito.eu"
+  bucket: "project-foccus"
+  prefix: "Hereon/ESC1"
+
+domain:
+  default_run_date: "2026-08-01"
+  # south, west, north, east — used for map center/fit when use_domain_bounds is set
+  bounds: [53.04, 5.12, 55.63, 10.40]
+
+# Scenario dropdown → S3 subfolder under YYYYMMDD/
+scenarios:
+  default: no_veg
+  items:
+    no_veg:
+      label: "Vegetation-free"
+      subfolder: "no_veg"
+    with_veg:
+      label: "With vegetation"
+      subfolder: "with_veg"
+    diff:
+      label: "Change (with − without)"
+      subfolder: "diff"
+      is_difference: true
+
+indicators:
+  "SSH q95":
+    file: "q95_ssh_tris.pmtiles"
+    nc_file: "q95_ssh.nc"
+    nc_variable: "q95_ssh"
+    attribute: "q95_ssh"
+    caption: "SSH q95 (m)"
+    unit: "m"
+    cmap: "plasma"
+    critical_default: 1.0
+    diff_cmap: "coolwarm"
+    diff_critical_default: 0.0
+
+  "Significant wave height q95":
+    file: "q95_Hs_tris.pmtiles"
+    nc_file: "q95_Hs.nc"
+    nc_variable: "q95_Hs"
+    attribute: "q95_Hs"
+    caption: "Hs q95 (m)"
+    unit: "m"
+    cmap: "plasma"
+    critical_default: 1.5
+    diff_cmap: "coolwarm"
+    diff_critical_default: 0.0
+
+  "Bed stress q95":
+    file: "q95_tau_tris.pmtiles"
+    nc_file: "q95_tau.nc"
+    nc_variable: "q95_tau"
+    attribute: "q95_tau"
+    caption: "Bed stress q95 (N/m²)"
+    unit: "Pa"
+    cmap: "plasma"
+    critical_default: 0.5
+    diff_cmap: "coolwarm"
+    diff_critical_default: 0.0
+
+  "Erosion risk ratio (R1)":
+    file: "R1_tris.pmtiles"
+    nc_file: "R1.nc"
+    nc_variable: "R1"
+    attribute: "erosion_R1"
+    attribute_fallbacks: ["R1"]
+    caption: "Erosion risk ratio R1"
+    unit: "-"
+    cmap: "erosion_risk"
+    critical_default: 0.5
+    value_min_default: 0.25
+    value_max_default: 1.0
+    use_domain_bounds: true
+    diff_cmap: "coolwarm"
+    diff_critical_default: 0.0
+
+  "Vegetation (nveg)":
+    file: "nveg_tris.pmtiles"
+    nc_file: "nveg.nc"
+    nc_variable: "nveg"
+    attribute: "nveg"
+    caption: "Vegetation cover (nveg)"
+    unit: "-"
+    cmap: "Greens"
+    critical_default: 0.5

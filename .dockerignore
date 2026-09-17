@@ -1,0 +1,40 @@
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# Python caches / bytecode
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Local virtual environments
+.venv/
+.venv-cloud/
+venv/
+env/
+
+# Local backups / scratch
+project_steps_and_backups/
+_cloud_map_test.py
+_render_check.py
+douglas.zip
+douglas/
+
+# HPC processing / upload scripts (not needed in the viewer image)
+compute_scenario_diff.py
+run_pmtile_workflow.sh
+EDITO_upload_persistent_json_credentials_today_*.py
+scripts/
+modify_for_my_case.md
+
+# Docker build helpers (already applied via -f; keep out of image)
+docker/
+Dockerfile
+.dockerignore
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
